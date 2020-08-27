@@ -18,35 +18,37 @@ urlSet.add(TV_NAME1)
 .add(TV_NAME7)
 .add(TV_NAME8)
 
-var watchTime = 0
-
-window.onload = () => {
-   urlSet.forEach(value => {
-    if (Symbol.keyFor(value) === location.hostname) {
-        recordTime()
+window.onload = function(){
+   urlSet.forEach(function(value){
+    if (Symbol.keyFor(value) === location.hostname && typeof chrome.app.isInstalled!=="undefined") {
+        chrome.runtime.sendMessage({begin:true},function(response) {
+            console.log(response);
+        })
     }else{
         return
     }
    })
 }
 
-window.onbeforeunload = () => {
-    urlSet.forEach(value => {
-        if (Symbol.keyFor(value) === location.hostname) {
-            clearInterval()
-            chrome.runtime.sendMessage({time:watchTime}, function(response) {
-                console.log('收到来自后台的回复：' + response);
+window.onbeforeunload = function(){
+    urlSet.forEach(function(value){
+        if (Symbol.keyFor(value) === location.hostname && typeof chrome.app.isInstalled!=="undefined") {
+            chrome.runtime.sendMessage({begin:false}, function(response) {
+                console.log(response);
             });
-            watchTime = 0;
         }else{
             return
         }
     })
 }
-
-recordTime = () => {
-    setInterval(() => {
-        watchTime += 1
-        console.log(watchTime);
-    },1000)
+window.onunload = function(){
+    urlSet.forEach(function(value){
+        if (Symbol.keyFor(value) === location.hostname && typeof chrome.app.isInstalled!=="undefined") {
+            chrome.runtime.sendMessage({begin:false}, function(response) {
+                console.log(response);
+            });
+        }else{
+            return
+        }
+    })
 }

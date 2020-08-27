@@ -1,5 +1,5 @@
 if(window.localStorage.getItem('time')){
-    let time =  window.localStorage.getItem('time')
+    let time =  Number(window.localStorage.getItem('time'))
     let displayTime =''
     if(time < 60){
         displayTime = time + '秒'
@@ -12,5 +12,5 @@ if(window.localStorage.getItem('time')){
     }
     document.getElementById('time').innerText = displayTime   
 }else{
-    console.log("not have data");
+    document.getElementById('time').innerText = '没有时长记录呢'
 }
