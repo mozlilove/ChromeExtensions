@@ -37,6 +37,7 @@ window.onbeforeunload = () => {
             chrome.runtime.sendMessage({time:watchTime}, function(response) {
                 console.log('收到来自后台的回复：' + response);
             });
+            watchTime = 0;
         }else{
             return
         }
