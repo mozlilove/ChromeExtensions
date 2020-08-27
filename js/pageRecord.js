@@ -5,7 +5,7 @@ const TV_NAME4 = Symbol.for("m.douyu.com");
 const TV_NAME5 = Symbol.for("m.huya.com");
 const TV_NAME6 = Symbol.for("www.egame.qq.com");
 const TV_NAME7 = Symbol.for("m.egame.qq.com");
-const TV_NAME8 = Symbol.for("www.live.bilibili.com");
+const TV_NAME8 = Symbol.for("live.bilibili.com");
 
 let urlSet = new Set()
 
